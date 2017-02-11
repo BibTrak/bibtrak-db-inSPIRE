@@ -1,0 +1,9 @@
+def fetch(search):
+	reqStr = "https://inspirehep.net/search?p=find "+search+"&of=recjson&ot=recid,authors,title,collaboration,publication_info,standard identifier&rg=1"
+	request = Request(reqStr);
+	try:
+		response = urlopen(request);
+		paperData = response.open();
+		return paperData
+	except URLError, e:
+		raise URLError("inSPIRE fetch command encountered URLError:"+e)
