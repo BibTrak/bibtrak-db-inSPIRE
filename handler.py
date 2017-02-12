@@ -1,4 +1,5 @@
 from urllib2 import Request, urlopen, URLError
+import json
 
 #Fetches information on the paper from the inSPIRE api.
 #Params:
@@ -13,7 +14,8 @@ def fetch(id):
 	try:
 		response = urlopen(request);
 		paperData = response.read();
-		return paperData
+		dictData = json.loads(paperData)[0];
+		return dictData
 	except URLError as e:
 		raise URLError("inSPIRE fetch command encountered URLError:"+repr(e))
 
